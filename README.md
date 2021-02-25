@@ -1,7 +1,2 @@
 "# FinalEventsProject" 
-"# FinalEventsProject" 
-"# FinalEventsProject" 
-"# FinalEventsProject" 
-"# FinalEventsProject-" 
-"# FinalEventsProject" 
-"# FinalEventsProject" 
+Java ITSchool Course
