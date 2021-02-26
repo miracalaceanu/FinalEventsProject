@@ -85,14 +85,15 @@ public class Event {
 	@Override
 	public String toString() {
 		String finalString;
-		finalString= "Event [id=" + id + ", name=" + name +  ", eventType=" + eventType
+		finalString= "\nEVENT [id=" + id + ", name=" + name +  ", eventType=" + eventType
 				+ ", localDate=" + localDate + ", ticketType=" + ticketType + ", ticketPrice=" + ticketPrice;
 		if (Hibernate.isInitialized(this.organizer) && this.organizer != null)
 			finalString += this.organizer.toString();
 		if (Hibernate.isInitialized(this.address) && this.address != null)
 			finalString += this.address.toString();
-		
+	
 		return finalString;
+		
 		
 	}
 
