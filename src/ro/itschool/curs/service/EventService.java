@@ -1,7 +1,9 @@
 package ro.itschool.curs.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import ro.itschool.curs.Dao.EventDao;
 import ro.itschool.curs.entity.Event;
@@ -40,6 +42,21 @@ public class EventService {
 		List<Event> events = new ArrayList<Event>();
 		try {
 			events =	eventDao.findEventByName(name);
+		} catch (Exception e) {
+			System.out.println("AICI GESTIONAM EROAREA");
+			e.printStackTrace();
+		}finally {
+			System.out.println("Suntem in finally");
+		}
+		eventDao.closeCurrentSession();	
+		return events;
+	}
+	
+	public List<Event> findEventByDate(LocalDate date) {
+		eventDao.openCurrentSession();
+		List<Event> events = new ArrayList<Event>();
+		try {
+			events =	eventDao.findEventByDate(date);
 		} catch (Exception e) {
 			System.out.println("AICI GESTIONAM EROAREA");
 			e.printStackTrace();

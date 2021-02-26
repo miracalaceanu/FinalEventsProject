@@ -51,7 +51,7 @@ private String website;
 	@Override
 	public String toString() {
 		return "\nAddress id=" + id + ", name=" + name + ", streetName=" + streetName + ", number=" + number
-				+ ", phoneNumber=" + phoneNumber + ", website=" + website  ;
+				+ ", phoneNumber=" + phoneNumber + ", website=" + website + "\n"  ;
 	}
 	
 	

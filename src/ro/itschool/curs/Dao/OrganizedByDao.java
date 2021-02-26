@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import lombok.extern.java.Log;
+import ro.itschool.curs.entity.Address;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.util.HibernateUtils;
 
@@ -55,6 +56,18 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 	public OrganizedBy findById(Integer id) {
 		log.info("Am apelat metoda find");
 		return session.get(OrganizedBy.class, id);
+	}
+	
+	// suficient sa folosim o parte din nume
+	public List<OrganizedBy> findOrganizedByByName(String name) throws Exception {
+		log.info("Am apelat metoda find organizedby by name");
+		List<OrganizedBy> organizer = session.createQuery("from OrganizedBy b where b.name like CONCAT('%',:name,'%')")
+				.setParameter("name", name).list();
+		log.info("Numele dupa care cautam OrganizedBy este: " + name);
+		log.info("Avem urmatoarii organizatori: " + organizer);
+		if (organizer.isEmpty())
+			throw new Exception("Nu exista OrganizedBy cu numele: " + name);
+		return organizer;
 	}
 
 	@Override

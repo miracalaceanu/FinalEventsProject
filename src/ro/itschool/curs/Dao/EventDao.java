@@ -1,5 +1,6 @@
 package ro.itschool.curs.Dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +72,20 @@ public class EventDao implements EntityDao<Event, Integer> {
 			}
 			return filteredEvent;
 		}
+		
+		public List<Event> findEventByDate(LocalDate date) {
+			log.info("Am apelat metoda find by date");
+			List<Event> events = session.createQuery("from Event").list();
+			List<Event> eventsByDate = new ArrayList<>();
+			for (Event event : events) {
+				if (event.getLocalDate().equals(date))
+					eventsByDate.add(event);
+			}
+			return eventsByDate;
+		}
+		
+	
+		
 
 		@Override
 		public void delete(Event entity) {

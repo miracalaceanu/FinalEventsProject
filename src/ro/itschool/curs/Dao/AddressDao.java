@@ -55,8 +55,19 @@ public class AddressDao implements EntityDao<Address, Integer> {
 	public Address findById(Integer id) {
 		log.info("Am apelat metoda find");
 		return session.get(Address.class, id);
-	}
+		}
 
+	public List<Address> findAddressByName(String name) throws Exception {
+		log.info("Am apelat metoda find address by name");
+		List<Address> adresses = session.createQuery("from Address b where b.name like CONCAT('%',:name,'%')")
+				.setParameter("name", name).list();
+		log.info("Numele dupa care cautam adresa este: " + name);
+		log.info("Avem urmatoarele adrese: " + adresses);
+		if (adresses.isEmpty())
+			throw new Exception("Nu exista adrese cu numele: " + name);
+		return adresses;
+	}
+	
 	@Override
 	public void delete(Address entity) {
 		log.info("Am apelat metoda delete");
