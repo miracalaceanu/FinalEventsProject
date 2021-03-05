@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import lombok.extern.java.Log;
 import ro.itschool.curs.entity.Address;
+import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.util.HibernateUtils;
 
@@ -59,7 +60,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 	}
 	
 	// suficient sa folosim o parte din nume
-	public List<OrganizedBy> findOrganizedByByName(String name) throws Exception {
+	public List<OrganizedBy> findOrganizerByName(String name) throws Exception {
 		log.info("Am apelat metoda find organizedby by name");
 		List<OrganizedBy> organizer = session.createQuery("from OrganizedBy b where b.name like CONCAT('%',:name,'%')")
 				.setParameter("name", name).list();
@@ -69,6 +70,18 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 			throw new Exception("Nu exista OrganizedBy cu numele: " + name);
 		return organizer;
 	}
+	
+//	@SuppressWarnings("unchecked")// name of organizer found in event-mapping class
+//	public List<Event> findEventsOrganizedBy(String name) throws Exception {
+//		log.info("method findEventsOrganizedBy is called");
+//		List<Event> events = session.createQuery("from Event b where b.name like CONCAT('%',:name,'%')")
+//				.setParameter("name", name).list();
+//		log.info("OrganizedBy name is: " + name);
+//		log.info("events organizedBy " +name+ " are: " + events);
+//		if (events.isEmpty())
+//			throw new Exception("there are no events OrganizedBy: " + name);
+//		return events;
+//	}
 
 	@Override
 	public void delete(OrganizedBy entity) {

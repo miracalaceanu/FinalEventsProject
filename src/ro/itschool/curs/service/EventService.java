@@ -6,7 +6,9 @@ import java.util.List;
 
 
 import ro.itschool.curs.Dao.EventDao;
+import ro.itschool.curs.entity.Address;
 import ro.itschool.curs.entity.Event;
+import ro.itschool.curs.enums.EventType;
 
 
 
@@ -43,14 +45,29 @@ public class EventService {
 		try {
 			events =	eventDao.findEventByName(name);
 		} catch (Exception e) {
-			System.out.println("AICI GESTIONAM EROAREA");
+			System.out.println("ERROR HANDLING");
 			e.printStackTrace();
 		}finally {
-			System.out.println("Suntem in finally");
+			System.out.println("Finally");
 		}
 		eventDao.closeCurrentSession();	
 		return events;
 	}
+//	public List<Event> findEventsOrganizedBy(String name) {
+//		eventDao.openCurrentSession();
+//		List<Event> events = new ArrayList<Event>();
+//		try {
+//			events =	eventDao.findEventsOrganizedBy(name);
+//		} catch (Exception e) {
+//			System.out.println("ERROR HANDLING");
+//			e.printStackTrace();
+//		}finally {
+//			System.out.println("Finally");
+//		}
+//		eventDao.closeCurrentSession();	
+//		return events;
+//	}
+	
 	
 	public List<Event> findEventByDate(LocalDate date) {
 		eventDao.openCurrentSession();
@@ -58,14 +75,29 @@ public class EventService {
 		try {
 			events =	eventDao.findEventByDate(date);
 		} catch (Exception e) {
-			System.out.println("AICI GESTIONAM EROAREA");
+			System.out.println("ERROR HANDLING");
 			e.printStackTrace();
 		}finally {
-			System.out.println("Suntem in finally");
+			System.out.println("Finally");
 		}
 		eventDao.closeCurrentSession();	
 		return events;
 	}
+	
+	public String findEventsByType(EventType eventType) {
+		eventDao.openCurrentSession();
+		List<Event> lista = null;
+		try {
+			lista = eventDao.findEventsByType(eventType);
+		} catch (Exception e) {
+						e.printStackTrace();
+		}finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return "The list is "+ lista;
+	}
+	
 
 	public void deleteEvent(Event event) {
 		eventDao.openCurrentSessionwithTransaction();

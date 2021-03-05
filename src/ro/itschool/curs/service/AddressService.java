@@ -1,6 +1,7 @@
 package ro.itschool.curs.service;
 
 import java.util.List;
+import java.util.Set;
 
 import ro.itschool.curs.Dao.AddressDao;
 import ro.itschool.curs.entity.Address;
@@ -9,7 +10,7 @@ public class AddressService {
 	
 	private AddressDao addressDao;
 
-	public AddressService(AddressDao addressDao) {
+	public AddressService() {
 		this.addressDao = new AddressDao();
 	
 	}
@@ -43,6 +44,21 @@ public class AddressService {
 		addressDao.closeCurrentSession();
 		return lista;
 	}
+
+	public List<Address > findAddressByName(String name) {
+		addressDao.openCurrentSession();
+		List<Address> lista = null;
+		try {
+			lista = addressDao.findAddressByName(name);
+		} catch (Exception e) {
+						e.printStackTrace();
+		}finally {
+			System.out.println("Finally");
+		}
+		addressDao.closeCurrentSession();
+		return lista;
+	}
+	
 	public void deleteAllAddresses() {
 		addressDao.openCurrentSessionwithTransaction();
 		addressDao.deleteAll();

@@ -36,14 +36,14 @@ import ro.itschool.curs.enums.TicketType;
 
 @NoArgsConstructor
 
-public class Event {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int id;
-
-	@Column(nullable = false)
-	private String name;
+public class Event extends Identification {
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column
+//	private int id;
+//
+//	@Column(nullable = false)
+//	private String name;
 
 
 	@Enumerated(EnumType.STRING)//  convert an enum to its ordinal or String value.
@@ -72,8 +72,8 @@ public class Event {
 	public Event(int id, String name,  EventType eventType, LocalDate localDate, Set<OrganizedBy> organizer,
 			Address address, TicketType ticketType, double ticketPrice) {
 		super();
-		this.id = id;
-		this.name = name;
+//		this.id = id;
+//		this.name = name;
 		this.eventType = eventType;
 		this.localDate = localDate;
 		this.organizer 	 = organizer;
@@ -85,7 +85,7 @@ public class Event {
 	@Override
 	public String toString() {
 		String finalString;
-		finalString= "\nEVENT [id=" + id + ", name=" + name +  ", eventType=" + eventType
+		finalString= "\nEVENT " +super.toString()+ ", eventType=" + eventType
 				+ ", localDate=" + localDate + ", ticketType=" + ticketType + ", ticketPrice=" + ticketPrice;
 		if (Hibernate.isInitialized(this.organizer) && this.organizer != null)
 			finalString += this.organizer.toString();

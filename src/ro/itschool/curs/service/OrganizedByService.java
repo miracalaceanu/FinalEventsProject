@@ -1,8 +1,10 @@
 package ro.itschool.curs.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ro.itschool.curs.Dao.OrganizedByDao;
+import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.entity.OrganizedBy;
 
 
@@ -45,6 +47,23 @@ private OrganizedByDao organizedByDao;
 		organizedByDao.closeCurrentSession();
 		return lista;
 	}
+	
+
+	public List<OrganizedBy> findOrganizerByName(String name) {
+		organizedByDao.openCurrentSession();
+		List<OrganizedBy> organizer = new ArrayList<OrganizedBy>();
+		try {
+			organizer =	organizedByDao.findOrganizerByName(name);
+		} catch (Exception e) {
+			System.out.println("ERROR HANDLING");
+			e.printStackTrace();
+		}finally {
+			System.out.println("Finally");
+		}
+		organizedByDao.closeCurrentSession();	
+		return organizer;
+	}
+	
 	public void deleteAllOrganizedBy() {
 		organizedByDao.openCurrentSessionwithTransaction();
 		organizedByDao.deleteAll();
