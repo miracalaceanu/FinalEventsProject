@@ -80,7 +80,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		List<Event> filteredEvent = new ArrayList<>();
 		for (Event event : events) {
 			for (OrganizedBy organizedBy : event.getOrganizer())
-				if (organizedBy.getName().equals(name))
+				if (organizedBy.getName().contains(name))
 					filteredEvent.add(event);
 		}
 		return filteredEvent;

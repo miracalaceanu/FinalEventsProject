@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.itschool.curs.Dao.OrganizedByDao;
+import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.entity.OrganizedBy;
 
@@ -64,7 +65,13 @@ private OrganizedByDao organizedByDao;
 		return organizer;
 	}
 	
-	
+	public List<Event> listEventsByOrganizer(String name){
+		organizedByDao.openCurrentSession();
+		List<Event> filteredEvent = new ArrayList<>();
+		filteredEvent=organizedByDao.listEventsByOrganizer(name);
+		organizedByDao.closeCurrentSession();
+		return filteredEvent;
+	}
 	public void deleteAllOrganizedBy() {
 		organizedByDao.openCurrentSessionwithTransaction();
 		organizedByDao.deleteAll();

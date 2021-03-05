@@ -1,6 +1,7 @@
 package ro.itschool.curs.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -57,20 +58,6 @@ public class EventService {
 		eventDao.closeCurrentSession();
 		return events;
 	}
-//	public List<Event> findEventsOrganizedBy(String name) {
-//		eventDao.openCurrentSession();
-//		List<Event> events = new ArrayList<Event>();
-//		try {
-//			events =	eventDao.findEventsOrganizedBy(name);
-//		} catch (Exception e) {
-//			System.out.println("ERROR HANDLING");
-//			e.printStackTrace();
-//		}finally {
-//			System.out.println("Finally");
-//		}
-//		eventDao.closeCurrentSession();	
-//		return events;
-//	}
 
 	public List<Event> findEventByDate(LocalDate date) {
 		eventDao.openCurrentSession();
@@ -84,8 +71,39 @@ public class EventService {
 			System.out.println("Finally");
 		}
 		eventDao.closeCurrentSession();
+		System.out.println(events);
 		return events;
 	}
+//	
+//	
+	public  List<Event> findEventsByDate() {
+		EventService eventService = new EventService();
+		Scanner scanner = new Scanner(System.in);
+		String date;
+		LocalDate localDate;
+		while(true) {
+			System.out.println("Please enter the date in the format 'YYYY-MM-DD' ");
+			date = scanner.next();
+			if(!isValid(date)) {
+				 System.err.println("Wrong date format, please enter date again.");
+				 continue;
+			}
+			break;
+		}
+		scanner.close();
+		localDate = LocalDate.parse(date);
+		return eventService.findEventByDate(localDate) ;
+	}
+	
+	private static boolean isValid(String date) {
+		try {
+			LocalDate.parse(date);
+		} catch (DateTimeParseException e) {
+			return false;
+		}
+		return true;
+	}
+	
 
 	public String findEventsByType(EventType eventType) {
 		eventDao.openCurrentSession();

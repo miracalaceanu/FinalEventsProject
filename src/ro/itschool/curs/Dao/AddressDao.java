@@ -7,6 +7,7 @@ import javax.persistence.*;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import lombok.extern.java.Log;
@@ -79,6 +80,13 @@ public class AddressDao implements EntityDao<Address, Integer> {
 		criteria.add(Restrictions.eq("id", id));
 		List addresses= criteria.list();
 		return addresses;
+	}
+	public List<Address> listAddressByName(String name){
+		Criteria criteria= session.createCriteria(Address.class);
+		criteria.add(Restrictions.like("name", name, MatchMode.ANYWHERE).ignoreCase());// gaseste organizedby care contine in nume "stringul dat"
+		List address= criteria.list();
+		System.out.println(address);
+		return address;
 	}
 	
 	@Override

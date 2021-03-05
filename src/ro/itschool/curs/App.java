@@ -33,30 +33,43 @@ import ro.itschool.curs.util.HibernateUtils;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		OrganizedByDao organizedByDao=new OrganizedByDao();
-		organizedByDao.openCurrentSession();
-		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
-			organizedByDao.closeCurrentSession();
 		
+//		OrganizedByDao organizedByDao=new OrganizedByDao();
+//		organizedByDao.openCurrentSession();
+//		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
+//			organizedByDao.closeCurrentSession();
 		
-
-//		System.out.println(AppUtils.findEventByDate());
-
-
-		
+//			System.out.println(AppUtils.findEventByDate());
 		
 //		EventService eventService =  new EventService();
+//		eventService.findEventsByDate();
 //		Event event = new Event();
 //		event= eventService.findEventById(6);
 //		event.setLocalDate(LocalDate.parse("2021-03-11"));
 //		eventService.updateEvent(event);
 //		System.out.println(eventService.findEventsByType(EventType.FAIR));
-//		System.out.println(eventService.findEventByName("Purcell's King Arthur"));
+//		System.out.println(eventService.findEventByName(" Arthur"));
 //		eventService.createEvent();
+		
+//		AddressService addressService= new AddressService();
+//	Address address =addressService.findAddressById(8);
+//	address.setName("Opera");
+//	addressService.updateAddress(address);
+//	
+//	Address address2 =addressService.findAddressById(7);
+//	address2.setName("Street Opera");
+//	addressService.updateAddress(address2);
+//	System.out.println(addressService.findAddressById(8));
+//	System.out.println(addressService.findAddressById(7));
+//	
+//	AddressDao addressDao= new AddressDao();
+//	addressDao.openCurrentSession();
+//	addressDao.listAddressByName("opera").toString();
+//	addressDao.closeCurrentSession();
 	
 
-//		OrganizedByService organizedByService= new OrganizedByService();
-//		System.out.println(organizedByService.findOrganizerByName("Opera"));
+		OrganizedByService organizedByService= new OrganizedByService();
+		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
 //		OrganizedBy organizedBy= new OrganizedBy();
 //		organizedBy.setFounded(2021);
 //		organizedBy.setName("LALA land");
