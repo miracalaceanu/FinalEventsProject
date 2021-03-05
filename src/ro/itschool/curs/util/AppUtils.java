@@ -9,7 +9,7 @@ import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.service.EventService;
 
 public class AppUtils {
-	public static List<Event> enterEventDate() {
+	public static List<Event> findEventByDate() {
 		EventService eventService = new EventService();
 		Scanner scanner = new Scanner(System.in);
 		String date;

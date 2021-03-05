@@ -34,7 +34,7 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 
-//		System.out.println(AppUtils.enterEventDate());
+//		System.out.println(AppUtils.findEventByDate());
 
 //		AddressService addressService= new AddressService(); 
 //		System.out.println(addressService.findAddressByName("u"));
@@ -42,11 +42,15 @@ public class App {
 		
 		EventService eventService =  new EventService();
 //		System.out.println(eventService.findEventsByType(EventType.FAIR));
-		System.out.println(eventService.findEventByName("Purcell's King Arthur"));
+//		System.out.println(eventService.findEventByName("Purcell's King Arthur"));
+		eventService.createEvent();
 		
-		
-//		OrganizedByService organizedBySrervice= new OrganizedByService();
+//		OrganizedByService organizedByService= new OrganizedByService();
 //		System.out.println(organizedBySrervice.findOrganizerByName("Opera"));
+//		OrganizedBy organizedBy= new OrganizedBy();
+//		organizedBy.setFounded(2021);
+//		organizedBy.setName("LALA land");
+//		organizedByService.saveOrganizedBy(organizedBy);
 		
 
 

@@ -64,6 +64,7 @@ private OrganizedByDao organizedByDao;
 		return organizer;
 	}
 	
+	
 	public void deleteAllOrganizedBy() {
 		organizedByDao.openCurrentSessionwithTransaction();
 		organizedByDao.deleteAll();
