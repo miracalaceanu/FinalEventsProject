@@ -22,14 +22,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 @Entity
-public class Address {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int id;
-	
-	@Column
-	private String name;
+public class Address extends Identification {
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column
+//	private int id;
+//	
+//	@Column
+//	private String name;
 	
 	@Column
 private String streetName;
@@ -50,7 +50,7 @@ private String website;
 
 	@Override
 	public String toString() {
-		return "\nAddress id=" + id + ", name=" + name + ", streetName=" + streetName + ", number=" + number
+		return "\nAddress " + super.toString()+ ", streetName=" + streetName + ", number=" + number
 				+ ", phoneNumber=" + phoneNumber + ", website=" + website + "\n"  ;
 	}
 	

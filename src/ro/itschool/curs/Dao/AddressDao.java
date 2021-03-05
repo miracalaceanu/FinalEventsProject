@@ -59,6 +59,7 @@ public class AddressDao implements EntityDao<Address, Integer> {
 
 	public List<Address> findAddressByName(String name) throws Exception {
 		log.info("Am apelat metoda find address by name");
+		@SuppressWarnings("unchecked")
 		List<Address> adresses = session.createQuery("from Address b where b.name like CONCAT('%',:name,'%')")
 				.setParameter("name", name).list();
 		log.info("Numele dupa care cautam adresa este: " + name);
