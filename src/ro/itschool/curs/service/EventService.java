@@ -126,7 +126,6 @@ public class EventService {
 		double ticketPrice = scanner.nextDouble();
 		event.setTicketPrice(ticketPrice);
 
-		event.setAddress(address);
 		System.out.println("Enter institution name : ");
 		String addressName = scanner.next();
 		address.setName(addressName);
@@ -142,22 +141,22 @@ public class EventService {
 		System.out.println("Enter phone number : ");
 		String addressPhoneNumber = scanner.next();
 		address.setPhoneNumber(addressPhoneNumber);
+		event.setAddress(address);
 
-		event.setOrganizer(organizer);
 		System.out.println("Enter organizer name: ");
 		String organizerName = scanner.next();
 		organizedBy.setName(organizerName);
 
-		System.out.println("Organizer fonded in year: ");
+		System.out.println("Organizer founded in year: ");
 		int organizerFounded = scanner.nextInt();
 		organizedBy.setFounded(organizerFounded);
 		organizer.add(organizedBy);
-
+		event.setOrganizer(organizer);
 		eventDao.persist(event);
-	
+
 		eventDao.closeCurrentSessionwithTransaction();
 		scanner.close();
-		System.err.print("This is the event you created:" );
+		System.err.print("This is the event you created:");
 		System.out.println(event);
 		return event;
 

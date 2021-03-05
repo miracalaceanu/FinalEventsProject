@@ -1,16 +1,23 @@
 package ro.itschool.curs.Dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
+import org.hibernate.type.Type;
 
 import lombok.extern.java.Log;
 import ro.itschool.curs.entity.Address;
 import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.util.HibernateUtils;
-
 
 @Log
 public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
@@ -58,7 +65,27 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		log.info("Am apelat metoda find");
 		return session.get(OrganizedBy.class, id);
 	}
-	
+
+//	CRITERIA
+	public List<OrganizedBy> listOrganizerById(int id) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = session.createCriteria(OrganizedBy.class);
+		criteria.add(Restrictions.eq("id", id));
+		List organizer = criteria.list();
+		return organizer;
+	}
+// enhanced for- nested loop
+	public List<Event> listEventsByOrganizer(String name) {
+		List<Event> events = session.createQuery("from Event").list();
+		List<Event> filteredEvent = new ArrayList<>();
+		for (Event event : events) {
+			for (OrganizedBy organizedBy : event.getOrganizer())
+				if (organizedBy.getName().equals(name))
+					filteredEvent.add(event);
+		}
+		return filteredEvent;
+	}
+
 	// suficient sa folosim o parte din nume
 	public List<OrganizedBy> findOrganizerByName(String name) throws Exception {
 		log.info("Am apelat metoda find organizedby by name");
@@ -67,27 +94,16 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		log.info("Numele dupa care cautam OrganizedBy este: " + name);
 		log.info("Avem urmatoarii organizatori: " + organizer);
 		if (organizer.isEmpty())
-			throw new Exception("Nu exista OrganizedBy cu numele: " + name);
+			throw new Exception("there are no organizers called: " + name);
 		return organizer;
 	}
-	
-//	@SuppressWarnings("unchecked")// name of organizer found in event-mapping class
-//	public List<Event> findEventsOrganizedBy(String name) throws Exception {
-//		log.info("method findEventsOrganizedBy is called");
-//		List<Event> events = session.createQuery("from Event b where b.name like CONCAT('%',:name,'%')")
-//				.setParameter("name", name).list();
-//		log.info("OrganizedBy name is: " + name);
-//		log.info("events organizedBy " +name+ " are: " + events);
-//		if (events.isEmpty())
-//			throw new Exception("there are no events OrganizedBy: " + name);
-//		return events;
-//	}
+
 
 	@Override
 	public void delete(OrganizedBy entity) {
 		log.info("Am apelat metoda delete");
 		session.delete(entity);
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -102,8 +118,6 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		log.info("Am apelat metoda deleteAll");
 		session.createQuery("delete from OrganizedBy").executeUpdate();
 
-		
 	}
 
-	
 }

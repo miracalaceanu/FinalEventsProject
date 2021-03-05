@@ -33,26 +33,35 @@ import ro.itschool.curs.util.HibernateUtils;
 public class App {
 
 	public static void main(String[] args) throws Exception {
+		OrganizedByDao organizedByDao=new OrganizedByDao();
+		organizedByDao.openCurrentSession();
+		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
+			organizedByDao.closeCurrentSession();
+		
+		
 
 //		System.out.println(AppUtils.findEventByDate());
 
-//		AddressService addressService= new AddressService(); 
-//		System.out.println(addressService.findAddressByName("u"));
-//		
+
 		
-		EventService eventService =  new EventService();
+		
+//		EventService eventService =  new EventService();
+//		Event event = new Event();
+//		event= eventService.findEventById(6);
+//		event.setLocalDate(LocalDate.parse("2021-03-11"));
+//		eventService.updateEvent(event);
 //		System.out.println(eventService.findEventsByType(EventType.FAIR));
 //		System.out.println(eventService.findEventByName("Purcell's King Arthur"));
-		eventService.createEvent();
-		
+//		eventService.createEvent();
+	
+
 //		OrganizedByService organizedByService= new OrganizedByService();
-//		System.out.println(organizedBySrervice.findOrganizerByName("Opera"));
+//		System.out.println(organizedByService.findOrganizerByName("Opera"));
 //		OrganizedBy organizedBy= new OrganizedBy();
 //		organizedBy.setFounded(2021);
 //		organizedBy.setName("LALA land");
 //		organizedByService.saveOrganizedBy(organizedBy);
 		
-
 
 	}
 
