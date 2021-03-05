@@ -2,8 +2,12 @@ package ro.itschool.curs.Dao;
 
 import java.util.List;
 
+import javax.persistence.*;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import lombok.extern.java.Log;
 import ro.itschool.curs.entity.Address;
@@ -67,6 +71,14 @@ public class AddressDao implements EntityDao<Address, Integer> {
 		if (adresses.isEmpty())
 			throw new Exception("Nu exista adrese cu numele: " + name);
 		return adresses;
+	}
+//	CRITERIA
+	public List<Address> listAddressById(int id){
+		@SuppressWarnings("deprecation")
+		Criteria criteria= session.createCriteria(Address.class);
+		criteria.add(Restrictions.eq("id", id));
+		List addresses= criteria.list();
+		return addresses;
 	}
 	
 	@Override

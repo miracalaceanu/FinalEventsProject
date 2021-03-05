@@ -4,11 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import lombok.extern.java.Log;
+import ro.itschool.curs.entity.Address;
 import ro.itschool.curs.entity.Event;
+import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.enums.EventType;
 import ro.itschool.curs.util.HibernateUtils;
@@ -87,6 +91,8 @@ public class EventDao implements EntityDao<Event, Integer> {
 //			return events;
 //		}
 		
+		
+		
 		public List<Event> findEventByDate(LocalDate date) {
 			log.info("Am apelat metoda find by date");
 			List<Event> events = session.createQuery("from Event").list();
@@ -98,7 +104,7 @@ public class EventDao implements EntityDao<Event, Integer> {
 			return eventsByDate;
 		}
 		
-		public List<Event> findEventsByType(EventType eventType) throws Exception {
+		public List<Event> findEventsByType(EventType eventType)  {
 			log.info("Am apelat metoda find events by type");
 			@SuppressWarnings("unchecked")
 			List<Event> events = session.createQuery("from Event b where b.eventType like CONCAT('%',:name,'%')")
@@ -106,7 +112,7 @@ public class EventDao implements EntityDao<Event, Integer> {
 			log.info("Event type is " + eventType);
 			log.info("These are the events : " + events);
 			if (events.isEmpty())
-				throw new Exception("There are no events of type: " + eventType);
+			System.out.println(("There are no events of type: " + eventType));
 			return events;
 		}
 		
