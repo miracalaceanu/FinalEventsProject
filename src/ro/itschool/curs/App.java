@@ -33,21 +33,26 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 
-		OrganizedByDao organizedByDao = new OrganizedByDao();
-		organizedByDao.openCurrentSession();
-		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
-		organizedByDao.closeCurrentSession();
-
 		EventService eventService = new EventService();
-		eventService.findEventsByDate();
+//		eventService.findEventsByDate();
+//		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
+//		System.out.println(eventService.findEventByName(" Arthur"));
+//		eventService.createEvent();
+ System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 30)));
+		
+//		OrganizedByService organizedByService = new OrganizedByService();
+//		System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));
+
+		
+
+		
 
 //		event= eventService.findEventById(6);
 //		event.setLocalDate(LocalDate.parse("2021-03-11"));
 //		eventService.updateEvent(event);
-//		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
-//		System.out.println(eventService.findEventByName(" Arthur"));
 
-//		eventService.createEvent();
+
+
 
 //		
 //		EventDao eventDao= new EventDao();
