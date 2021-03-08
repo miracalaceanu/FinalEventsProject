@@ -170,6 +170,21 @@ public class EventService {
 		return event;
 
 	}
+	//events between dates
+	public List<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate){
+		eventDao.openCurrentSession();
+		List<Event> lista=null;
+		try {
+			lista = eventDao.listEventsBetweenDates(startDate,endDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return lista;
+	}
+	
 	public List<Event> findEventsByType(EventType eventType) {
 		eventDao.openCurrentSession();
 		List<Event> lista=null;

@@ -3,11 +3,15 @@ package ro.itschool.curs.Dao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 
 import lombok.extern.java.Log;
 import ro.itschool.curs.entity.Address;
@@ -90,6 +94,15 @@ public class EventDao implements EntityDao<Event, Integer> {
 					eventsByDate.add(event);
 			}
 			return eventsByDate;
+		}
+		//events between dates
+		public List<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate) {
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(Event.class);
+			criteria.add(Restrictions.between("localDate", startDate,endDate));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// getting duplicates because of EAGER fetch
+			List listEventsBetweenDates =  criteria.list();
+			return listEventsBetweenDates;
 		}
 		
 		public List<Event> findEventsByType(EventType eventType)  {
