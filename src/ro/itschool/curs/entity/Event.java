@@ -30,23 +30,14 @@ import ro.itschool.curs.enums.EventType;
 import ro.itschool.curs.enums.TicketType;
 
 @Entity // clasa are un tabel corespondent in mysql
-@Table(name = "Event") // se va mapa pe tabelul denumit "events"- este alt nume decat clasa; altfel
-						// tabelul se numeste by default event
+@Table(name = "Event") 
+		
 @Data
 
 @NoArgsConstructor
 
 public class Event extends Identification {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column
-//	private int id;
-//
-//	@Column(nullable = false)
-//	private String name;
-
-
-	@Enumerated(EnumType.STRING)//  convert an enum to its ordinal or String value.
+	@Enumerated(EnumType.STRING) //  converts an "enum" to its ordinal or String value.
 	@Column
 	private EventType eventType;
 
@@ -72,8 +63,6 @@ public class Event extends Identification {
 	public Event(int id, String name,  EventType eventType, LocalDate localDate, Set<OrganizedBy> organizer,
 			Address address, TicketType ticketType, double ticketPrice) {
 		super();
-//		this.id = id;
-//		this.name = name;
 		this.eventType = eventType;
 		this.localDate = localDate;
 		this.organizer 	 = organizer;
@@ -93,8 +82,7 @@ public class Event extends Identification {
 			finalString += this.address.toString();
 	
 		return finalString;
-		
-		
+			
 	}
 
 	

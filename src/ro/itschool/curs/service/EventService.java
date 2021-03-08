@@ -17,6 +17,8 @@ import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.enums.EventType;
 import ro.itschool.curs.enums.TicketType;
 
+
+
 public class EventService {
 	private EventDao eventDao;
 
@@ -74,25 +76,33 @@ public class EventService {
 		System.out.println(events);
 		return events;
 	}
-//	
-//	
+	
+//	find events by date, fix date with hyphen if necessary, re-enter date if necessary
 	public  List<Event> findEventsByDate() {
 		EventService eventService = new EventService();
 		Scanner scanner = new Scanner(System.in);
-		String date;
+		String date=null;
 		LocalDate localDate;
 		while(true) {
 			System.out.println("Please enter the date in the format 'YYYY-MM-DD' ");
-			date = scanner.next();
-			// size, substring... valid data.
-			if(!isValid(date)) {
+			String scannerDate = scanner.next();
+			if(isValid(scannerDate)) {
+				date=scannerDate;
+						}
+			if(scannerDate.length()<10) {
+				date= scannerDate.substring(0, 4)+"-"+scannerDate.substring(4, 6)+"-"+scannerDate.substring(6);
+				localDate = LocalDate.parse(date);
+				}
+			if(scannerDate.length()>=10&&(!isValid(scannerDate))) {
 				 System.err.println("Wrong date format, please enter date again.");
 				 continue;
 			}
 			break;
 		}
+		
 		scanner.close();
 		localDate = LocalDate.parse(date);
+		System.err.println("these are the events");
 		return eventService.findEventByDate(localDate) ;
 	}
 	
@@ -105,21 +115,6 @@ public class EventService {
 		return true;
 	}
 	
-
-	public List<Event> findEventsByType(EventType eventType) {
-		eventDao.openCurrentSession();
-		List<Event> lista=null;
-		try {
-			lista = eventDao.findEventsByType(eventType);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println("Finally");
-		}
-		eventDao.closeCurrentSession();
-		return lista;
-	}
-
 	/* Method to CREATE a new EVENT in the database */
 	public Event createEvent() {
 		eventDao.openCurrentSessionwithTransaction();
@@ -174,6 +169,19 @@ public class EventService {
 		System.out.println(event);
 		return event;
 
+	}
+	public List<Event> findEventsByType(EventType eventType) {
+		eventDao.openCurrentSession();
+		List<Event> lista=null;
+		try {
+			lista = eventDao.findEventsByType(eventType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return lista;
 	}
 
 	public void deleteEvent(Event event) {
