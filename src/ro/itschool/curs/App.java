@@ -27,31 +27,28 @@ import ro.itschool.curs.enums.TicketType;
 import ro.itschool.curs.service.AddressService;
 import ro.itschool.curs.service.EventService;
 import ro.itschool.curs.service.OrganizedByService;
-import ro.itschool.curs.util.AppUtils;
 import ro.itschool.curs.util.HibernateUtils;
 
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		
-//		OrganizedByDao organizedByDao=new OrganizedByDao();
-//		organizedByDao.openCurrentSession();
-//		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
-//			organizedByDao.closeCurrentSession();
-		
-//			System.out.println(AppUtils.findEventByDate());
-		
-		EventService eventService =  new EventService();
-//		eventService.findEventsByDate();
-				
+
+		OrganizedByDao organizedByDao = new OrganizedByDao();
+		organizedByDao.openCurrentSession();
+		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
+		organizedByDao.closeCurrentSession();
+
+		EventService eventService = new EventService();
+		eventService.findEventsByDate();
+
 //		event= eventService.findEventById(6);
 //		event.setLocalDate(LocalDate.parse("2021-03-11"));
 //		eventService.updateEvent(event);
-		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
+//		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
 //		System.out.println(eventService.findEventByName(" Arthur"));
-	
+
 //		eventService.createEvent();
-		
+
 //		
 //		EventDao eventDao= new EventDao();
 //		eventDao.openCurrentSession();
@@ -73,7 +70,6 @@ public class App {
 //	addressDao.openCurrentSession();
 //	addressDao.listAddressByName("opera").toString();
 //	addressDao.closeCurrentSession();
-	
 
 //		OrganizedByService organizedByService= new OrganizedByService();
 //		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
@@ -81,10 +77,7 @@ public class App {
 //		organizedBy.setFounded(2021);
 //		organizedBy.setName("LALA land");
 //		organizedByService.saveOrganizedBy(organizedBy);
-		
 
 	}
-
-	
 
 }
