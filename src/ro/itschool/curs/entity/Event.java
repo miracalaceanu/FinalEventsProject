@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.Hibernate;
-
+import org.hibernate.annotations.OrderBy;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -58,6 +58,7 @@ public class Event extends Identification {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "organizedBy_event", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "organizedBy_id") })
+
 	private Set<OrganizedBy> organizer = new HashSet<>();
 	
 	public Event(int id, String name,  EventType eventType, LocalDate localDate, Set<OrganizedBy> organizer,

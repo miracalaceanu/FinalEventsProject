@@ -198,6 +198,32 @@ public class EventService {
 		eventDao.closeCurrentSession();
 		return lista;
 	}
+	public List<Event>findEventsByTicketType(TicketType ticketType) {
+		eventDao.openCurrentSession();
+		List<Event> lista=null;
+		try {
+			lista = eventDao.findEventsByTicketType(ticketType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return lista;
+	}
+	public List<Event>sortAscEventsByTicketPrice() {
+		eventDao.openCurrentSession();
+		List<Event> lista=null;
+		try {
+			lista = eventDao.sortAscEventsByTicketPrice();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return lista;
+	}
 
 	public void deleteEvent(Event event) {
 		eventDao.openCurrentSessionwithTransaction();

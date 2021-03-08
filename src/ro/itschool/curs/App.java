@@ -36,9 +36,11 @@ public class App {
 		EventService eventService = new EventService();
 //		eventService.findEventsByDate();
 //		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
-//		System.out.println(eventService.findEventByName(" Arthur"));
+//		System.out.println(eventService.findEventsByTicketType(TicketType.BUY_TICKET_ON_THE_SPOT));
+//		System.out.println(eventService.findEventByName(" Four Seasons"));
+		System.out.println(eventService.sortAscEventsByTicketPrice());
 //		eventService.createEvent();
- System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 30)));
+// System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 30)));
 		
 //		OrganizedByService organizedByService = new OrganizedByService();
 //		System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));

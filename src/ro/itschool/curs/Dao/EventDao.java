@@ -19,6 +19,7 @@ import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.enums.EventType;
+import ro.itschool.curs.enums.TicketType;
 import ro.itschool.curs.util.HibernateUtils;
 
 @Log
@@ -115,8 +116,30 @@ public class EventDao implements EntityDao<Event, Integer> {
 			System.out.println(("There are no events of type: " + eventType));}
 			return events;
 		}
+		/**
+		 * 
+		 * @param ticketType
+		 * @return
+		 */
+		public List<Event> findEventsByTicketType(TicketType ticketType)  {
+			log.info("findEventsByTicketType method is called");
+			List<Event> events = session.createQuery("from Event b where b.ticketType = :name")
+					.setParameter("name", ticketType).list();
+			log.info ("Events with " + ticketType+ " tickets are: ");
+			if (events.isEmpty()) {
+			System.err.println(("There are no events of type: " + ticketType));}
+			return events;
+		}
 		
-	
+		public List<Event> sortAscEventsByTicketPrice() {
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(Event.class, "Event");
+			criteria.addOrder(org.hibernate.criterion.Order.asc("ticketPrice"));
+//			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);// getting duplicates because of EAGER fetch
+			List listEventsBetweenDates =  criteria.list();
+			return listEventsBetweenDates;
+		}
+		
 		
 
 		@Override
