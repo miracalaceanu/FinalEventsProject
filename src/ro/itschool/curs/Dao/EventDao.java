@@ -79,18 +79,6 @@ public class EventDao implements EntityDao<Event, Integer> {
 			return filteredEvent;
 		}
 		
-//		@SuppressWarnings("unchecked")// name of organizer found in event-mapping class
-//		public List<Event> findEventsOrganizedBy(String name) throws Exception {
-//			log.info("method findEventsOrganizedBy is called");
-//			List<Event> events = session.createQuery("from Event b where b.name like CONCAT('%',:name,'%')")
-//					.setParameter("name", name).list();
-//			log.info("OrganizedBy name is: " + name);
-//			log.info("events organizedBy " +name+ " are: " + events);
-//			if (events.isEmpty())
-//				throw new Exception("there are no events OrganizedBy: " + name);
-//			return events;
-//		}
-		
 		
 		
 		public List<Event> findEventByDate(LocalDate date) {
@@ -106,13 +94,12 @@ public class EventDao implements EntityDao<Event, Integer> {
 		
 		public List<Event> findEventsByType(EventType eventType)  {
 			log.info("Am apelat metoda find events by type");
-			@SuppressWarnings("unchecked")
 			List<Event> events = session.createQuery("from Event b where b.eventType like CONCAT('%',:name,'%')")
-					.setParameter("name", eventType).list();
+					.setParameter("name", eventType.toString()).list();
 			log.info("Event type is " + eventType);
 			log.info("These are the events : " + events);
-			if (events.isEmpty())
-			System.out.println(("There are no events of type: " + eventType));
+			if (events.isEmpty()) {
+			System.out.println(("There are no events of type: " + eventType));}
 			return events;
 		}
 		

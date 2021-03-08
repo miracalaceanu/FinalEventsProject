@@ -84,6 +84,7 @@ public class EventService {
 		while(true) {
 			System.out.println("Please enter the date in the format 'YYYY-MM-DD' ");
 			date = scanner.next();
+			// size, substring... valid data.
 			if(!isValid(date)) {
 				 System.err.println("Wrong date format, please enter date again.");
 				 continue;
@@ -105,9 +106,9 @@ public class EventService {
 	}
 	
 
-	public String findEventsByType(EventType eventType) {
+	public List<Event> findEventsByType(EventType eventType) {
 		eventDao.openCurrentSession();
-		List<Event> lista = null;
+		List<Event> lista=null;
 		try {
 			lista = eventDao.findEventsByType(eventType);
 		} catch (Exception e) {
@@ -116,7 +117,7 @@ public class EventService {
 			System.out.println("Finally");
 		}
 		eventDao.closeCurrentSession();
-		return "The list is " + lista;
+		return lista;
 	}
 
 	/* Method to CREATE a new EVENT in the database */
@@ -124,8 +125,8 @@ public class EventService {
 		eventDao.openCurrentSessionwithTransaction();
 		Event event = new Event();
 		Address address = new Address();
-		Set<OrganizedBy> organizer = new HashSet<>();
 		OrganizedBy organizedBy = new OrganizedBy();
+		Set<OrganizedBy> organizer = new HashSet<>();
 		Scanner scanner = new Scanner(System.in);
 		System.err.println("ADD NEW EVENT");
 		System.out.println("Please enter event name: ");
@@ -144,32 +145,27 @@ public class EventService {
 		double ticketPrice = scanner.nextDouble();
 		event.setTicketPrice(ticketPrice);
 
-		System.out.println("Enter institution name : ");
-		String addressName = scanner.next();
-		address.setName(addressName);
-		System.out.println("Enter street name : ");
-		String addressStreetName = scanner.next();
-		address.setStreetName(addressStreetName);
-		System.out.println("Enter number : ");
-		int addressNumber = scanner.nextInt();
-		address.setNumber(addressNumber);
-		System.out.println("Enter website : ");
-		String addressWebsite = scanner.next();
-		address.setWebsite(addressWebsite);
-		System.out.println("Enter phone number : ");
-		String addressPhoneNumber = scanner.next();
-		address.setPhoneNumber(addressPhoneNumber);
+		System.out.println("Enter addressID (look up address IDs on the phpMyAdmin page): ");
+		int addressID = scanner.nextInt();
+		AddressDao addressDao= new AddressDao();
+		addressDao.openCurrentSession();
+		address= addressDao.findById(addressID);
+		addressDao.closeCurrentSession();
 		event.setAddress(address);
-
-		System.out.println("Enter organizer name: ");
-		String organizerName = scanner.next();
-		organizedBy.setName(organizerName);
-
-		System.out.println("Organizer founded in year: ");
-		int organizerFounded = scanner.nextInt();
-		organizedBy.setFounded(organizerFounded);
+		
+		String more="yes";
+		while(more.charAt(0) == 'y' || more.charAt(0) =='Y') {
+		System.out.println("Enter organizerID (look up address IDs on the phpMyAdmin page): ");
+		int organizerID = scanner.nextInt();
+		OrganizedByDao organizedByDao= new OrganizedByDao();
+		organizedByDao.openCurrentSession();
+		organizedBy= organizedByDao.findById(organizerID);
 		organizer.add(organizedBy);
+		organizedByDao.closeCurrentSession();
 		event.setOrganizer(organizer);
+		System.out.println("Do you want to enter more organizers? (yes/no): ");
+		more = scanner.next();
+		}
 		eventDao.persist(event);
 
 		eventDao.closeCurrentSessionwithTransaction();
