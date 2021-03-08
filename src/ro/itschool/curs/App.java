@@ -41,16 +41,23 @@ public class App {
 		
 //			System.out.println(AppUtils.findEventByDate());
 		
-//		EventService eventService =  new EventService();
+		EventService eventService =  new EventService();
 //		eventService.findEventsByDate();
-//		Event event = new Event();
+				
 //		event= eventService.findEventById(6);
 //		event.setLocalDate(LocalDate.parse("2021-03-11"));
 //		eventService.updateEvent(event);
-//		System.out.println(eventService.findEventsByType(EventType.FAIR));
+		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
 //		System.out.println(eventService.findEventByName(" Arthur"));
+	
 //		eventService.createEvent();
 		
+//		
+//		EventDao eventDao= new EventDao();
+//		eventDao.openCurrentSession();
+//		System.out.println(eventDao.findEventsByType(EventType.MUSEUM_EXHIBITION));
+//		eventDao.closeCurrentSession();
+//		
 //		AddressService addressService= new AddressService();
 //	Address address =addressService.findAddressById(8);
 //	address.setName("Opera");
@@ -68,8 +75,8 @@ public class App {
 //	addressDao.closeCurrentSession();
 	
 
-		OrganizedByService organizedByService= new OrganizedByService();
-		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
+//		OrganizedByService organizedByService= new OrganizedByService();
+//		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
 //		OrganizedBy organizedBy= new OrganizedBy();
 //		organizedBy.setFounded(2021);
 //		organizedBy.setName("LALA land");
