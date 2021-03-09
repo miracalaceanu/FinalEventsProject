@@ -35,23 +35,33 @@ public class App {
 
 		EventService eventService = new EventService();
 //		eventService.findEventsByDate();
-//		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
+//		System.out.println(eventService.findEventsByType(EventType.ART_OPENING) );
 //		System.out.println(eventService.findEventsByTicketType(TicketType.BUY_TICKET_ON_THE_SPOT));
 //		System.out.println(eventService.findEventByName(" Four Seasons"));
-		System.out.println(eventService.sortAscEventsByTicketPrice());
+//		System.out.println(eventService.sortAscEventsByTicketPrice());
 //		eventService.createEvent();
-// System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 30)));
+// System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 20)));
+		
+		Event event= eventService.findEventById(6);
+		System.err.println("This is the event before date is modified: "+event);
+		event.setLocalDate(LocalDate.parse("2021-03-20"));
+		eventService.updateEvent(event);
+		System.out.println("This is the event after date is modified: "+event);
 		
 //		OrganizedByService organizedByService = new OrganizedByService();
-//		System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));
-
+//		System.out.println(organizedByService.listEventsByOrganizer("Vatican "));
+//		OrganizedBy organizedBy= new OrganizedBy();
+//		organizedBy.setFounded(2021);
+//		organizedBy.setName("LALA land");
+//		organizedByService.saveOrganizedBy(organizedBy);
 		
+//OrganizedByDao organizedDao= new OrganizedByDao();
+//		organizedDao.openCurrentSession();
+//		List<OrganizedBy>organizers= organizedDao.findAll();
+//		System.out.println(organizedDao.filterOrganizersByFounded(organizers, 2015));
+//organizedDao.closeCurrentSession();
 
-		
 
-//		event= eventService.findEventById(6);
-//		event.setLocalDate(LocalDate.parse("2021-03-11"));
-//		eventService.updateEvent(event);
 
 
 
@@ -78,12 +88,7 @@ public class App {
 //	addressDao.listAddressByName("opera").toString();
 //	addressDao.closeCurrentSession();
 
-//		OrganizedByService organizedByService= new OrganizedByService();
-//		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
-//		OrganizedBy organizedBy= new OrganizedBy();
-//		organizedBy.setFounded(2021);
-//		organizedBy.setName("LALA land");
-//		organizedByService.saveOrganizedBy(organizedBy);
+
 
 	}
 

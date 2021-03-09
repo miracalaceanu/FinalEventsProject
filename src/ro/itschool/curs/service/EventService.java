@@ -91,8 +91,9 @@ public class EventService {
 						}
 			if(scannerDate.length()<10) {
 				date= scannerDate.substring(0, 4)+"-"+scannerDate.substring(4, 6)+"-"+scannerDate.substring(6);
+				if(isValid(date)) 
 				localDate = LocalDate.parse(date);
-				}
+								}
 			if(scannerDate.length()>=10&&(!isValid(scannerDate))) {
 				 System.err.println("Wrong date format, please enter date again.");
 				 continue;

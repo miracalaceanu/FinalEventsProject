@@ -94,6 +94,9 @@ public class EventDao implements EntityDao<Event, Integer> {
 				if (event.getLocalDate().equals(date))
 					eventsByDate.add(event);
 			}
+			if(eventsByDate.isEmpty()) {
+				System.err.println("There are no events on:" +date );
+			}
 			return eventsByDate;
 		}
 		//events between dates

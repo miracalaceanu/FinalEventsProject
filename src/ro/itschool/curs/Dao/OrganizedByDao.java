@@ -84,6 +84,9 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 				if (organizedBy.getName().contains(name))
 					filteredEvent.add(event);
 		}
+		if (filteredEvent.isEmpty()) {
+			System.err.println("There are no events organized by : " + name);
+		}
 		return filteredEvent;
 	}
 
@@ -95,7 +98,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		log.info("Numele dupa care cautam OrganizedBy este: " + name);
 		log.info("Avem urmatoarii organizatori: " + organizer);
 		if (organizer.isEmpty())
-			throw new Exception("there are no organizers called: " + name);
+			throw new Exception("There are no organizers called: " + name);
 		return organizer;
 	}
 
