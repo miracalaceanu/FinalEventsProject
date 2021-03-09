@@ -116,11 +116,7 @@ public class EventDao implements EntityDao<Event, Integer> {
 			System.out.println(("There are no events of type: " + eventType));}
 			return events;
 		}
-		/**
-		 * 
-		 * @param ticketType
-		 * @return
-		 */
+		
 		public List<Event> findEventsByTicketType(TicketType ticketType)  {
 			log.info("findEventsByTicketType method is called");
 			List<Event> events = session.createQuery("from Event b where b.ticketType = :name")

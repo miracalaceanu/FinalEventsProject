@@ -11,7 +11,7 @@ INSERT INTO OrganizedBy(name, founded) VALUES ("Tate Modern",2000)
 INSERT INTO OrganizedBy(name, founded) VALUES ("Miaudio",2010)
 INSERT INTO OrganizedBy(name, founded) VALUES ("Mobius Gallery", 2014)
 INSERT INTO OrganizedBy(name,founded) VALUES ("BMW",1916)
-INSERT INTO OrganizedBy(name,founded) VALUES ("Asociatia Culturala Contrasens",2015)
+INSERT INTO OrganizedBy(name,founded) VALUES ("Asociatia Culturala Contrasens",2018)
 
 
 INSERT INTO Address(name,streetName,number,phoneNumber,website) VALUES ("Opera Romana Timisoara","Piata Victoriei", 2, "+40256201284","www.ort.ro")

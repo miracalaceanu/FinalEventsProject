@@ -74,6 +74,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		List organizer = criteria.list();
 		return organizer;
 	}
+
 // enhanced for- nested loop
 	public List<Event> listEventsByOrganizer(String name) {
 		List<Event> events = session.createQuery("from Event").list();
@@ -98,7 +99,6 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		return organizer;
 	}
 
-
 	@Override
 	public void delete(OrganizedBy entity) {
 		log.info("Am apelat metoda delete");
@@ -111,6 +111,19 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 	public List<OrganizedBy> findAll() {
 		log.info("Am apelat metoda findAll");
 		return session.createQuery("from OrganizedBy").list();
+	}
+
+	public List<OrganizedBy> filterOrganizersByFounded(List<OrganizedBy> organizers, int founded) throws Exception {
+		List<OrganizedBy> filteredOrganizers = new ArrayList<>();
+//		Integer b= founded;
+		for (OrganizedBy organizedBy : organizers) {
+//			Integer a = organizedBy.getFounded();
+			if (organizedBy.getFounded()==founded )
+				filteredOrganizers.add(organizedBy);
+		}
+		if(filteredOrganizers.isEmpty())
+			throw new Exception("filteredOrganizers is empty");
+		return filteredOrganizers;
 	}
 
 	@Override
