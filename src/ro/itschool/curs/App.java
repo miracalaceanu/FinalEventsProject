@@ -34,19 +34,25 @@ public class App {
 	public static void main(String[] args) throws Exception {
 
 		EventService eventService = new EventService();
+		
 //		eventService.findEventsByDate();
+		
+//		System.out.println(eventService.findEventByName(" Four Seasons"));
+		eventService.createEvent();
+		
+		
 //		System.out.println(eventService.findEventsByType(EventType.ART_OPENING) );
 //		System.out.println(eventService.findEventsByTicketType(TicketType.BUY_TICKET_ON_THE_SPOT));
-//		System.out.println(eventService.findEventByName(" Four Seasons"));
+
 //		System.out.println(eventService.sortAscEventsByTicketPrice());
-//		eventService.createEvent();
+	
 // System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 03, 20)));
 		
-		Event event= eventService.findEventById(6);
-		System.err.println("This is the event before date is modified: "+event);
-		event.setLocalDate(LocalDate.parse("2021-03-20"));
-		eventService.updateEvent(event);
-		System.out.println("This is the event after date is modified: "+event);
+//		Event event= eventService.findEventById(6);
+//		System.err.println("This is the event before date is modified: "+event);
+//		event.setLocalDate(LocalDate.parse("2021-03-20"));
+//		eventService.updateEvent(event);
+//		System.out.println("This is the event after date is modified: "+event);
 		
 //		OrganizedByService organizedByService = new OrganizedByService();
 //		System.out.println(organizedByService.listEventsByOrganizer("Vatican "));
@@ -56,22 +62,12 @@ public class App {
 //		organizedByService.saveOrganizedBy(organizedBy);
 		
 //OrganizedByDao organizedDao= new OrganizedByDao();
-//		organizedDao.openCurrentSession();
-//		List<OrganizedBy>organizers= organizedDao.findAll();
+//		organizedDao.openCurrentSessionwithTransaction();
+//		System.out.println(organizedDao.filterOrganizersByFounded(2015));
+////		List<OrganizedBy>organizers= organizedDao.findAll();
 //		System.out.println(organizedDao.filterOrganizersByFounded(organizers, 2015));
-//organizedDao.closeCurrentSession();
-
-
-
-
-
-
-//		
-//		EventDao eventDao= new EventDao();
-//		eventDao.openCurrentSession();
-//		System.out.println(eventDao.findEventsByType(EventType.MUSEUM_EXHIBITION));
-//		eventDao.closeCurrentSession();
-//		
+//organizedDao.closeCurrentSessionwithTransaction();
+		
 //		AddressService addressService= new AddressService();
 //	Address address =addressService.findAddressById(8);
 //	address.setName("Opera");

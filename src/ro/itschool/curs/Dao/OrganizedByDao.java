@@ -50,19 +50,19 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 
 	@Override
 	public void persist(OrganizedBy entity) {
-		log.info("Am apelat metoda persist");
+		log.info("Persist method is called");
 		session.save(entity);
 	}
 
 	@Override
 	public void update(OrganizedBy entity) {
-		log.info("Am apelat metoda update");
+		log.info("Update method is called");
 		session.update(entity);
 	}
 
 	@Override
 	public OrganizedBy findById(Integer id) {
-		log.info("Am apelat metoda find");
+		log.info("Find method is called");
 		return session.get(OrganizedBy.class, id);
 	}
 
@@ -92,11 +92,11 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 
 	// suficient sa folosim o parte din nume
 	public List<OrganizedBy> findOrganizerByName(String name) throws Exception {
-		log.info("Am apelat metoda find organizedby by name");
+		log.info("findOrganizedbyByName method is called");
 		List<OrganizedBy> organizer = session.createQuery("from OrganizedBy b where b.name like CONCAT('%',:name,'%')")
 				.setParameter("name", name).list();
-		log.info("Numele dupa care cautam OrganizedBy este: " + name);
-		log.info("Avem urmatoarii organizatori: " + organizer);
+		log.info("Name of the organizer is: " + name);
+		log.info("These are the organizers: " + organizer);
 		if (organizer.isEmpty())
 			throw new Exception("There are no organizers called: " + name);
 		return organizer;
@@ -104,7 +104,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 
 	@Override
 	public void delete(OrganizedBy entity) {
-		log.info("Am apelat metoda delete");
+		log.info("Delete method is called");
 		session.delete(entity);
 
 	}
@@ -112,26 +112,26 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrganizedBy> findAll() {
-		log.info("Am apelat metoda findAll");
+		log.info("FindAll method is called");
 		return session.createQuery("from OrganizedBy").list();
 	}
 
-	public List<OrganizedBy> filterOrganizersByFounded(List<OrganizedBy> organizers, int founded) throws Exception {
+	public List<OrganizedBy> filterOrganizersByFounded(int founded) {
+		List<OrganizedBy> organizers = session.createQuery("from OrganizedBy").list();
 		List<OrganizedBy> filteredOrganizers = new ArrayList<>();
-//		Integer b= founded;
 		for (OrganizedBy organizedBy : organizers) {
-//			Integer a = organizedBy.getFounded();
-			if (organizedBy.getFounded()==founded )
+			if (organizedBy.getFounded() == founded)
 				filteredOrganizers.add(organizedBy);
 		}
-		if(filteredOrganizers.isEmpty())
-			throw new Exception("filteredOrganizers is empty");
+		if (filteredOrganizers.isEmpty())
+			System.out.println("filteredOrganizers is empty");
+		
 		return filteredOrganizers;
 	}
 
 	@Override
 	public void deleteAll() {
-		log.info("Am apelat metoda deleteAll");
+		log.info("DeleteAll method is called");
 		session.createQuery("delete from OrganizedBy").executeUpdate();
 
 	}

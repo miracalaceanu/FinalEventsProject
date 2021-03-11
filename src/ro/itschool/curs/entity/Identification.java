@@ -17,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @MappedSuperclass
-public abstract class Identification {
+public class Identification {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

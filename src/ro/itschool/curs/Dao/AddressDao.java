@@ -44,33 +44,33 @@ public class AddressDao implements EntityDao<Address, Integer> {
 
 	@Override
 	public void persist(Address entity) {
-		log.info("Am apelat metoda persist");
+		log.info("Persist method is called");
 		session.save(entity);
 		
 	}
 
 	@Override
 	public void update(Address entity) {
-		log.info("Am apelat metoda update");
+		log.info("Update method is called");
 		session.update(entity);
 		
 	}
 
 	@Override
 	public Address findById(Integer id) {
-		log.info("Am apelat metoda find");
+		log.info("Find method is called");
 		return session.get(Address.class, id);
 		}
 
 	public List<Address> findAddressByName(String name) throws Exception {
-		log.info("Am apelat metoda find address by name");
+		log.info("Find address by name method is called");
 		@SuppressWarnings("unchecked")
 		List<Address> adresses = session.createQuery("from Address b where b.name like CONCAT('%',:name,'%')")
 				.setParameter("name", name).list();
-		log.info("Numele dupa care cautam adresa este: " + name);
-		log.info("Avem urmatoarele adrese: " + adresses);
+		log.info("Name of the address is: " + name);
+		log.info("These are the addresses: " + adresses);
 		if (adresses.isEmpty())
-			throw new Exception("Nu exista adrese cu numele: " + name);
+			throw new Exception("There are no adresses with the name: " + name);
 		return adresses;
 	}
 //	CRITERIA
@@ -91,19 +91,19 @@ public class AddressDao implements EntityDao<Address, Integer> {
 	
 	@Override
 	public void delete(Address entity) {
-		log.info("Am apelat metoda delete");
+		log.info("Delete method is called");
 		session.delete(entity);		
 	}
 
 	@Override
 	public List<Address> findAll() {
-		log.info("Am apelat metoda findAll");
+		log.info("FindAll method is called");
 		return session.createQuery("from Address").list();
 	}
 
 	@Override
 	public void deleteAll() {
-		log.info("Am apelat metoda deleteAll");
+		log.info("DeleteAll method is called");
 		session.createQuery("delete from Address").executeUpdate();
 	}
 

@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 import ro.itschool.curs.enums.EventType;
 import ro.itschool.curs.enums.TicketType;
 
-@Entity // clasa are un tabel corespondent in mysql
+@Entity 
 @Table(name = "Event") 
 		
 @Data
@@ -58,7 +58,6 @@ public class Event extends Identification {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "organizedBy_event", joinColumns = { @JoinColumn(name = "event_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "organizedBy_id") })
-
 	private Set<OrganizedBy> organizer = new HashSet<>();
 	
 	public Event(int id, String name,  EventType eventType, LocalDate localDate, Set<OrganizedBy> organizer,

@@ -55,26 +55,30 @@ public class EventDao implements EntityDao<Event, Integer> {
 
 		@Override
 		public void persist(Event entity) {
-			log.info("Am apelat metoda persist");
+			log.info("Persist method is called");
 			session.save(entity);
 		}
 
 		@Override
 		public void update(Event entity) {
-			log.info("Am apelat metoda update");
+			log.info("Update method is called");
 			session.update(entity);
 
 		}
 
 		@Override
 		public Event findById(Integer id) {
-			log.info("Am apelat metoda find");
+			log.info("Find method is called");
 			return session.get(Event.class, id);
 
 		}
-
+/**
+ * finds events that contain the "name" String passed as argument
+ * @param name
+ * @return list of events that contain "name"
+ */
 		public List<Event> findEventByName(String name) {
-			log.info("Am apelat metoda find by name");
+			log.info("Find by name method is called");
 			List<Event> events = session.createQuery("from Event").list();
 			List<Event> filteredEvent = new ArrayList<>();
 			for (Event event : events) {
@@ -84,10 +88,13 @@ public class EventDao implements EntityDao<Event, Integer> {
 			return filteredEvent;
 		}
 		
-		
-		
-		public List<Event> findEventByDate(LocalDate date) {
-			log.info("Am apelat metoda find by date");
+		/**
+		 * finds events that take place at a certain date
+		 * @param date
+		 * @return 	list of events 
+		 */
+			public List<Event> findEventByDate(LocalDate date) {
+			log.info("Find by date method is called");
 			List<Event> events = session.createQuery("from Event").list();
 			List<Event> eventsByDate = new ArrayList<>();
 			for (Event event : events) {
@@ -110,7 +117,7 @@ public class EventDao implements EntityDao<Event, Integer> {
 		}
 		
 		public List<Event> findEventsByType(EventType eventType)  {
-			log.info("Am apelat metoda find events by type");
+			log.info("Find events by type method is called");
 			List<Event> events = session.createQuery("from Event b where b.eventType like CONCAT('%',:name,'%')")
 					.setParameter("name", eventType.toString()).list();
 			log.info("Event type is " + eventType);
@@ -143,20 +150,20 @@ public class EventDao implements EntityDao<Event, Integer> {
 
 		@Override
 		public void delete(Event entity) {
-			log.info("Am apelat metoda delete");
+			log.info("Delete method is called");
 			session.delete(entity);
 
 		}
 
 		@Override
 		public List<Event> findAll() {
-			log.info("Am apelat metoda findAll");
+			log.info("FindAll method is called");
 			return session.createQuery("from event").list();
 		}
 
 		@Override
 		public void deleteAll() {
-			log.info("Am apelat metoda deleteAll");
+			log.info("DeleteAll method is called");
 			session.createQuery("delete from event").executeUpdate();
 
 		}

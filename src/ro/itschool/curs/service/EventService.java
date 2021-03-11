@@ -1,5 +1,6 @@
 package ro.itschool.curs.service;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -16,8 +17,6 @@ import ro.itschool.curs.entity.Event;
 import ro.itschool.curs.entity.OrganizedBy;
 import ro.itschool.curs.enums.EventType;
 import ro.itschool.curs.enums.TicketType;
-
-
 
 public class EventService {
 	private EventDao eventDao;
@@ -76,37 +75,40 @@ public class EventService {
 		System.out.println(events);
 		return events;
 	}
-	
-//	find events by date, fix date with hyphen if necessary, re-enter date if necessary
-	public  List<Event> findEventsByDate() {
+
+/**
+ * 	find events by date, fix date with hyphen if necessary, re-enter date if necessary
+ * @return list of events that take place at a certain date
+ */
+
+	@SuppressWarnings("finally")
+	public List<Event> findEventsByDate() {
 		EventService eventService = new EventService();
 		Scanner scanner = new Scanner(System.in);
-		String date=null;
+		String date = null;
 		LocalDate localDate;
-		while(true) {
+		while (true) {
 			System.out.println("Please enter the date in the format 'YYYY-MM-DD' ");
 			String scannerDate = scanner.next();
-			if(isValid(scannerDate)) {
-				date=scannerDate;
-						}
-			if(scannerDate.length()<10) {
-				date= scannerDate.substring(0, 4)+"-"+scannerDate.substring(4, 6)+"-"+scannerDate.substring(6);
-				if(isValid(date)) 
-				localDate = LocalDate.parse(date);
-								}
-			if(scannerDate.length()>=10&&(!isValid(scannerDate))) {
-				 System.err.println("Wrong date format, please enter date again.");
-				 continue;
+			if (isValid(scannerDate)) {
+				date = scannerDate;
+			}
+			if (scannerDate.length() == 8) {
+				date = scannerDate.substring(0, 4) + "-" + scannerDate.substring(4, 6) + "-" + scannerDate.substring(6);
+				if (isValid(date))
+					localDate = LocalDate.parse(date);
+			} else if (!isValid(scannerDate)) {
+				System.err.println("Wrong date format, please enter date again.");
+				continue;
 			}
 			break;
 		}
-		
 		scanner.close();
 		localDate = LocalDate.parse(date);
-		System.err.println("these are the events");
-		return eventService.findEventByDate(localDate) ;
+		System.err.println("These are the events");
+		return eventService.findEventByDate(localDate);
 	}
-	
+
 	private static boolean isValid(String date) {
 		try {
 			LocalDate.parse(date);
@@ -115,13 +117,11 @@ public class EventService {
 		}
 		return true;
 	}
-	
+
 	/* Method to CREATE a new EVENT in the database */
 	public Event createEvent() {
 		eventDao.openCurrentSessionwithTransaction();
 		Event event = new Event();
-		Address address = new Address();
-		OrganizedBy organizedBy = new OrganizedBy();
 		Set<OrganizedBy> organizer = new HashSet<>();
 		Scanner scanner = new Scanner(System.in);
 		System.err.println("ADD NEW EVENT");
@@ -141,26 +141,24 @@ public class EventService {
 		double ticketPrice = scanner.nextDouble();
 		event.setTicketPrice(ticketPrice);
 
-		System.out.println("Enter addressID (look up address IDs on the phpMyAdmin page): ");
+		AddressService addressService= new AddressService();
+		System.out.println("These are the adresses:"+addressService.findAllAddresses());
+		System.out.println("Enter addressID ");
 		int addressID = scanner.nextInt();
-		AddressDao addressDao= new AddressDao();
-		addressDao.openCurrentSession();
-		address= addressDao.findById(addressID);
-		addressDao.closeCurrentSession();
-		event.setAddress(address);
-		
-		String more="yes";
-		while(more.charAt(0) == 'y' || more.charAt(0) =='Y') {
-		System.out.println("Enter organizerID (look up address IDs on the phpMyAdmin page): ");
-		int organizerID = scanner.nextInt();
-		OrganizedByDao organizedByDao= new OrganizedByDao();
-		organizedByDao.openCurrentSession();
-		organizedBy= organizedByDao.findById(organizerID);
-		organizer.add(organizedBy);
-		organizedByDao.closeCurrentSession();
-		event.setOrganizer(organizer);
-		System.out.println("Do you want to enter more organizers? (yes/no): ");
-		more = scanner.next();
+		event.setAddress(addressService.findAddressById(addressID));
+
+		String more = "yes";
+		while (more.charAt(0) == 'y' || more.charAt(0) == 'Y') {
+			OrganizedByService organizedByService = new OrganizedByService();
+			System.out.println("These are the organizers:"+organizedByService.findAllOrganizedBy());
+			System.out.println("Enter organizerID:  ");
+			int organizerID = scanner.nextInt();
+			organizer.add(organizedByService.findOrganizedByById(organizerID));
+			
+			event.setOrganizer(organizer);
+			
+			System.out.println("Do you want to enter more organizers? (yes/no): ");
+			more = scanner.next();
 		}
 		eventDao.persist(event);
 
@@ -171,12 +169,13 @@ public class EventService {
 		return event;
 
 	}
-	//events between dates
-	public List<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate){
+
+	// events between dates
+	public List<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate) {
 		eventDao.openCurrentSession();
-		List<Event> lista=null;
+		List<Event> lista = null;
 		try {
-			lista = eventDao.listEventsBetweenDates(startDate,endDate);
+			lista = eventDao.listEventsBetweenDates(startDate, endDate);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -185,10 +184,10 @@ public class EventService {
 		eventDao.closeCurrentSession();
 		return lista;
 	}
-	
+
 	public List<Event> findEventsByType(EventType eventType) {
 		eventDao.openCurrentSession();
-		List<Event> lista=null;
+		List<Event> lista = null;
 		try {
 			lista = eventDao.findEventsByType(eventType);
 		} catch (Exception e) {
@@ -199,9 +198,10 @@ public class EventService {
 		eventDao.closeCurrentSession();
 		return lista;
 	}
-	public List<Event>findEventsByTicketType(TicketType ticketType) {
+
+	public List<Event> findEventsByTicketType(TicketType ticketType) {
 		eventDao.openCurrentSession();
-		List<Event> lista=null;
+		List<Event> lista = null;
 		try {
 			lista = eventDao.findEventsByTicketType(ticketType);
 		} catch (Exception e) {
@@ -212,9 +212,10 @@ public class EventService {
 		eventDao.closeCurrentSession();
 		return lista;
 	}
-	public List<Event>sortAscEventsByTicketPrice() {
+
+	public List<Event> sortAscEventsByTicketPrice() {
 		eventDao.openCurrentSession();
-		List<Event> lista=null;
+		List<Event> lista = null;
 		try {
 			lista = eventDao.sortAscEventsByTicketPrice();
 		} catch (Exception e) {
