@@ -50,19 +50,19 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 
 	@Override
 	public void persist(OrganizedBy entity) {
-		log.info("Am apelat metoda persist");
+		log.info("Persist method is called");
 		session.save(entity);
 	}
 
 	@Override
 	public void update(OrganizedBy entity) {
-		log.info("Am apelat metoda update");
+		log.info("Update method is called");
 		session.update(entity);
 	}
 
 	@Override
 	public OrganizedBy findById(Integer id) {
-		log.info("Am apelat metoda find");
+		log.info("Find method is called");
 		return session.get(OrganizedBy.class, id);
 	}
 
@@ -74,6 +74,7 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 		List organizer = criteria.list();
 		return organizer;
 	}
+
 // enhanced for- nested loop
 	public List<Event> listEventsByOrganizer(String name) {
 		List<Event> events = session.createQuery("from Event").list();
@@ -83,25 +84,27 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 				if (organizedBy.getName().contains(name))
 					filteredEvent.add(event);
 		}
+		if (filteredEvent.isEmpty()) {
+			System.err.println("There are no events organized by : " + name);
+		}
 		return filteredEvent;
 	}
 
 	// suficient sa folosim o parte din nume
 	public List<OrganizedBy> findOrganizerByName(String name) throws Exception {
-		log.info("Am apelat metoda find organizedby by name");
+		log.info("findOrganizedbyByName method is called");
 		List<OrganizedBy> organizer = session.createQuery("from OrganizedBy b where b.name like CONCAT('%',:name,'%')")
 				.setParameter("name", name).list();
-		log.info("Numele dupa care cautam OrganizedBy este: " + name);
-		log.info("Avem urmatoarii organizatori: " + organizer);
+		log.info("Name of the organizer is: " + name);
+		log.info("These are the organizers: " + organizer);
 		if (organizer.isEmpty())
-			throw new Exception("there are no organizers called: " + name);
+			throw new Exception("There are no organizers called: " + name);
 		return organizer;
 	}
 
-
 	@Override
 	public void delete(OrganizedBy entity) {
-		log.info("Am apelat metoda delete");
+		log.info("Delete method is called");
 		session.delete(entity);
 
 	}
@@ -109,13 +112,26 @@ public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrganizedBy> findAll() {
-		log.info("Am apelat metoda findAll");
+		log.info("FindAll method is called");
 		return session.createQuery("from OrganizedBy").list();
+	}
+
+	public List<OrganizedBy> filterOrganizersByFounded(int founded) {
+		List<OrganizedBy> organizers = session.createQuery("from OrganizedBy").list();
+		List<OrganizedBy> filteredOrganizers = new ArrayList<>();
+		for (OrganizedBy organizedBy : organizers) {
+			if (organizedBy.getFounded() == founded)
+				filteredOrganizers.add(organizedBy);
+		}
+		if (filteredOrganizers.isEmpty())
+			System.out.println("filteredOrganizers is empty");
+		
+		return filteredOrganizers;
 	}
 
 	@Override
 	public void deleteAll() {
-		log.info("Am apelat metoda deleteAll");
+		log.info("DeleteAll method is called");
 		session.createQuery("delete from OrganizedBy").executeUpdate();
 
 	}

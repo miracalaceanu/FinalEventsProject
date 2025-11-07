@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.Hibernate;
-
+import org.hibernate.annotations.OrderBy;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 import ro.mira.project.enums.EventType;
 import ro.mira.project.enums.TicketType;
 
-@Entity // clasa are un tabel corespondent in mysql
+@Entity 
 @Table(name = "Event") 
 		
 @Data

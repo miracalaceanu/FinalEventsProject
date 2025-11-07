@@ -34,36 +34,23 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		
 		EventService eventService = new EventService();
-		// eventService.findEventsByDate();
-
-		// System.out.println(eventService.findEventsByType(EventType.LIVE_MUSIC_CONCERT));
-
-//		System.out.println(eventService.findEventByName(" Arthur"));
-
+		
+		// Main functionality - create new event interactively
 		eventService.createEvent();
 
-//  System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 04, 30)));
+		// Example queries (commented out for demo)
+		// eventService.findEventsByDate();
+		// System.out.println(eventService.findEventsByType(EventType.LIVE_MUSIC_CONCERT));
+		// System.out.println(eventService.findEventByName("Four Seasons"));
+		// System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 04, 30)));
 		
-//		OrganizedByService organizedByService = new OrganizedByService();
-//		System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));
+		// OrganizedByService organizedByService = new OrganizedByService();
+		// System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));
 
-		
-
-		
-
-//		event= eventService.findEventById(6);
-//		event.setLocalDate(LocalDate.parse("2021-03-11"));
-//		eventService.updateEvent(event);
-
-
-
-
-//		
-//		EventDao eventDao= new EventDao();
-//		eventDao.openCurrentSession();
-//		System.out.println(eventDao.findEventsByType(EventType.MUSEUM_EXHIBITION));
-//		eventDao.closeCurrentSession();
-//		
+		// Event update example
+		// Event event = eventService.findEventById(6);
+		// event.setLocalDate(LocalDate.parse("2021-03-20"));
+		// eventService.updateEvent(event);
 //		AddressService addressService= new AddressService();
 //	Address address =addressService.findAddressById(8);
 //	address.setName("Opera");
@@ -80,12 +67,7 @@ public class App {
 //	addressDao.listAddressByName("opera").toString();
 //	addressDao.closeCurrentSession();
 
-//		OrganizedByService organizedByService= new OrganizedByService();
-//		System.out.println(organizedByService.listEventsByOrganizer("Tate "));
-//		OrganizedBy organizedBy= new OrganizedBy();
-//		organizedBy.setFounded(2021);
-//		organizedBy.setName("LALA land");
-//		organizedByService.saveOrganizedBy(organizedBy);
+
 
 		// Graceful shutdown
 		// System.out.println("\nApplication completed successfully.");
