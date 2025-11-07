@@ -5,9 +5,9 @@
 	<session-factory>
 		<!-- JDBC Database connection settings -->
 		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/eventsproject?useSSL=false</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/eventsproject?useSSL=false&amp;allowPublicKeyRetrieval=true</property>
 		<property name="connection.username">root</property>
-		<!-- <property name="connection.password">root</property> -->
+		<property name="connection.password">admin</property>
 		<!-- JDBC connection pool settings ... using built-in test pool -->
 		<property name="connection.pool_size">10</property>
 		<!-- Select our SQL dialect -->
@@ -28,8 +28,8 @@
 		<property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
 		<!-- Mapping entities -->
-		<mapping class="ro.itschool.curs.entity.Event" />
-		<mapping class="ro.itschool.curs.entity.Address" />
-		<mapping class="ro.itschool.curs.entity.OrganizedBy" />
+		<mapping class="ro.mira.project.entity.Event" />
+		<mapping class="ro.mira.project.entity.Address" />
+		<mapping class="ro.mira.project.entity.OrganizedBy" />
 	</session-factory>
 </hibernate-configuration>

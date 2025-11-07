@@ -1,4 +1,4 @@
-package ro.itschool.curs.Dao;
+package ro.mira.project.Dao;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,10 +14,10 @@ import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.type.Type;
 
 import lombok.extern.java.Log;
-import ro.itschool.curs.entity.Address;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.entity.OrganizedBy;
-import ro.itschool.curs.util.HibernateUtils;
+import ro.mira.project.entity.Address;
+import ro.mira.project.entity.Event;
+import ro.mira.project.entity.OrganizedBy;
+import ro.mira.project.util.HibernateUtils;
 
 @Log
 public class OrganizedByDao implements EntityDao<OrganizedBy, Integer> {

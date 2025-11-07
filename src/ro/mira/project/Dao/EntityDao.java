@@ -1,4 +1,4 @@
-package ro.itschool.curs.Dao;
+package ro.mira.project.Dao;
 
 
 import java.util.List;

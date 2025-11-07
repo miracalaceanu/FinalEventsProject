@@ -1,10 +1,10 @@
-package ro.itschool.curs.service;
+package ro.mira.project.service;
 
 import java.util.List;
 import java.util.Set;
 
-import ro.itschool.curs.Dao.AddressDao;
-import ro.itschool.curs.entity.Address;
+import ro.mira.project.Dao.AddressDao;
+import ro.mira.project.entity.Address;
 
 public class AddressService {
 	

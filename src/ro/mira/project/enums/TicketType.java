@@ -1,4 +1,4 @@
-package ro.itschool.curs.enums;
+package ro.mira.project.enums;
 
 public enum TicketType {
 FREE("free entrance") , BUY_ONLINE("buy online"), BUY_TICKET_ON_THE_SPOT("buy ticket on ther spot");

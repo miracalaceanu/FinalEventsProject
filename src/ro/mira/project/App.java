@@ -1,4 +1,4 @@
-package ro.itschool.curs;
+package ro.mira.project;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -16,38 +16,47 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import ro.itschool.curs.Dao.AddressDao;
-import ro.itschool.curs.Dao.EventDao;
-import ro.itschool.curs.Dao.OrganizedByDao;
-import ro.itschool.curs.entity.Address;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.entity.OrganizedBy;
-import ro.itschool.curs.enums.EventType;
-import ro.itschool.curs.enums.TicketType;
-import ro.itschool.curs.service.AddressService;
-import ro.itschool.curs.service.EventService;
-import ro.itschool.curs.service.OrganizedByService;
-import ro.itschool.curs.util.HibernateUtils;
+import ro.mira.project.Dao.AddressDao;
+import ro.mira.project.Dao.EventDao;
+import ro.mira.project.Dao.OrganizedByDao;
+import ro.mira.project.entity.Address;
+import ro.mira.project.entity.Event;
+import ro.mira.project.entity.OrganizedBy;
+import ro.mira.project.enums.EventType;
+import ro.mira.project.enums.TicketType;
+import ro.mira.project.service.AddressService;
+import ro.mira.project.service.EventService;
+import ro.mira.project.service.OrganizedByService;
+import ro.mira.project.util.HibernateUtils;
 
 public class App {
 
 	public static void main(String[] args) throws Exception {
-
-		OrganizedByDao organizedByDao = new OrganizedByDao();
-		organizedByDao.openCurrentSession();
-		System.out.println(organizedByDao.listEventsByOrganizer("Muzeul de Arta"));
-		organizedByDao.closeCurrentSession();
-
+		
 		EventService eventService = new EventService();
-		eventService.findEventsByDate();
+		// eventService.findEventsByDate();
+
+		// System.out.println(eventService.findEventsByType(EventType.LIVE_MUSIC_CONCERT));
+
+//		System.out.println(eventService.findEventByName(" Arthur"));
+
+		eventService.createEvent();
+
+//  System.out.println(eventService.listEventsBetweenDates(LocalDate.of(2021, 03, 01), LocalDate.of(2021, 04, 30)));
+		
+//		OrganizedByService organizedByService = new OrganizedByService();
+//		System.out.println(organizedByService.listEventsByOrganizer("Muzeul de Arta"));
+
+		
+
+		
 
 //		event= eventService.findEventById(6);
 //		event.setLocalDate(LocalDate.parse("2021-03-11"));
 //		eventService.updateEvent(event);
-//		System.out.println(eventService.findEventsByType(EventType.THEATRE_PLAY));
-//		System.out.println(eventService.findEventByName(" Arthur"));
 
-//		eventService.createEvent();
+
+
 
 //		
 //		EventDao eventDao= new EventDao();
@@ -78,6 +87,9 @@ public class App {
 //		organizedBy.setName("LALA land");
 //		organizedByService.saveOrganizedBy(organizedBy);
 
+		// Graceful shutdown
+		// System.out.println("\nApplication completed successfully.");
+		// HibernateUtils.shutdown();
 	}
 
 }

@@ -1,12 +1,11 @@
-package ro.itschool.curs.service;
+package ro.mira.project.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ro.itschool.curs.Dao.OrganizedByDao;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.entity.OrganizedBy;
-import ro.itschool.curs.entity.OrganizedBy;
+import ro.mira.project.Dao.OrganizedByDao;
+import ro.mira.project.entity.Event;
+import ro.mira.project.entity.OrganizedBy;
 
 
 public class OrganizedByService {

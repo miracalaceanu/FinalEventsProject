@@ -1,4 +1,4 @@
-package ro.itschool.curs.util;
+package ro.mira.project.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

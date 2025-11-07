@@ -1,8 +1,9 @@
-package ro.itschool.curs.Dao;
+package ro.mira.project.Dao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -10,12 +11,12 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import lombok.extern.java.Log;
-import ro.itschool.curs.entity.Address;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.entity.OrganizedBy;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.enums.EventType;
-import ro.itschool.curs.util.HibernateUtils;
+import ro.mira.project.entity.Address;
+import ro.mira.project.entity.Event;
+import ro.mira.project.entity.OrganizedBy;
+import ro.mira.project.entity.Event;
+import ro.mira.project.enums.EventType;
+import ro.mira.project.util.HibernateUtils;
 
 @Log
 public class EventDao implements EntityDao<Event, Integer> {
@@ -92,6 +93,14 @@ public class EventDao implements EntityDao<Event, Integer> {
 			return eventsByDate;
 		}
 		
+		public Set<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate) {
+			@SuppressWarnings("deprecation")
+			Criteria criteria = session.createCriteria(Event.class);
+			criteria.add(Restrictions.between("localDate", startDate,endDate));
+			Set listEventsBetweenDates = (Set) criteria.list();
+			return listEventsBetweenDates;
+		}
+		
 		public List<Event> findEventsByType(EventType eventType)  {
 			log.info("Am apelat metoda find events by type");
 			List<Event> events = session.createQuery("from Event b where b.eventType like CONCAT('%',:name,'%')")
@@ -127,5 +136,3 @@ public class EventDao implements EntityDao<Event, Integer> {
 		}
 
 	}
-
-

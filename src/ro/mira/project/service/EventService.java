@@ -1,4 +1,4 @@
-package ro.itschool.curs.service;
+package ro.mira.project.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import ro.itschool.curs.Dao.AddressDao;
-import ro.itschool.curs.Dao.EventDao;
-import ro.itschool.curs.Dao.OrganizedByDao;
-import ro.itschool.curs.entity.Address;
-import ro.itschool.curs.entity.Event;
-import ro.itschool.curs.entity.OrganizedBy;
-import ro.itschool.curs.enums.EventType;
-import ro.itschool.curs.enums.TicketType;
+import ro.mira.project.Dao.AddressDao;
+import ro.mira.project.Dao.EventDao;
+import ro.mira.project.Dao.OrganizedByDao;
+import ro.mira.project.entity.Address;
+import ro.mira.project.entity.Event;
+import ro.mira.project.entity.OrganizedBy;
+import ro.mira.project.enums.EventType;
+import ro.mira.project.enums.TicketType;
 
 
 
@@ -170,6 +170,21 @@ public class EventService {
 		return event;
 
 	}
+	
+	public Set<Event> listEventsBetweenDates(LocalDate startDate, LocalDate endDate){
+		eventDao.openCurrentSession();
+		Set<Event> lista=null;
+		try {
+			lista = eventDao.listEventsBetweenDates(startDate,endDate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("Finally");
+		}
+		eventDao.closeCurrentSession();
+		return lista;
+	}
+	
 	public List<Event> findEventsByType(EventType eventType) {
 		eventDao.openCurrentSession();
 		List<Event> lista=null;

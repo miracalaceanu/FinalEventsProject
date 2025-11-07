@@ -1,4 +1,4 @@
-package ro.itschool.curs.entity;
+package ro.mira.project.entity;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -26,8 +26,8 @@ import org.hibernate.Hibernate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import ro.itschool.curs.enums.EventType;
-import ro.itschool.curs.enums.TicketType;
+import ro.mira.project.enums.EventType;
+import ro.mira.project.enums.TicketType;
 
 @Entity // clasa are un tabel corespondent in mysql
 @Table(name = "Event") 

@@ -1,4 +1,4 @@
-package ro.itschool.curs.entity;
+package ro.mira.project.entity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

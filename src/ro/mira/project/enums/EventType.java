@@ -1,4 +1,4 @@
-package ro.itschool.curs.enums;
+package ro.mira.project.enums;
 
 public enum EventType {
 	OPERA ,CHILDRENS_THEATRE_PLAY, LIVE_MUSIC_CONCERT ,MUSEUM_EXHIBITION,   PARTY, CLASSICAL_MUSIC_CONCERT , THEATRE_PLAY ,  LAUNCHING_PARTY,
